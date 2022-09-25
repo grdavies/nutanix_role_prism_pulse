@@ -1,6 +1,5 @@
 ---
 # tasks file for nutanix_role_prism_pulse
----
   - name: Generate authorization string for PC
     set_fact:
       nutanix_pulse_auth_string: "{{ nutanix_pulse_username }}:{{ nutanix_pulse_password }}"
