@@ -24,7 +24,7 @@ This Ansible role downloads and deploys Nutanix Prism Central.
 
 ## Dependencies
 
-- grdavies.nutanix_role_prism_init_api
+None
 
 
 ## Example Playbook
@@ -33,7 +33,7 @@ This Ansible role downloads and deploys Nutanix Prism Central.
 - hosts: localhost
   gather_facts: false
   roles:
-    - role: grdavies.nutanix_role_prism_central_deploy
+    - role: grdavies.nutanix_role_prism_pulse/README.md
   vars:
     nutanix_host: 10.38.185.37
     nutanix_username: admin
