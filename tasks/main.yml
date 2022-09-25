@@ -1,16 +1,16 @@
 ---
 # tasks file for nutanix_role_prism_pulse
-  - name: Generate authorization string for PC
+  - name: Generate authorization string for "{{ nutanix_pulse_host }}"
     set_fact:
       nutanix_pulse_auth_string: "{{ nutanix_pulse_username }}:{{ nutanix_pulse_password }}"
     no_log: True
 
-  - name: Generate authorization header for PC
+  - name: Generate authorization header for "{{ nutanix_pulse_host }}"
     set_fact:
       nutanix_pulse_auth_api: "Basic {{ nutanix_pulse_auth_string | b64encode(encoding='ascii') }}"
     no_log: True
 
-  - name: Configure Pulse
+  - name: Configure Pulse on "{{ nutanix_pulse_host }}"
     uri:
       url: "https://{{ nutanix_pulse_host }}:{{ nutanix_pulse_port }}/PrismGateway/services/rest/v1/pulse"
       method: PUT
