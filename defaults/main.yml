@@ -1,6 +1,7 @@
 ---
 # defaults file for nutanix_role_prism_pulse
   validate_certs: no
+  nutanix_pulse_username: admin
   nutanix_pulse_status: True
   nutanix_pulse_default_nutanix_email: nos-asups@nutanix.com
   nutanix_pulse_enable_default_nutanix_email: false
