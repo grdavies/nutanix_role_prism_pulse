@@ -1,33 +1,35 @@
 ---
 # tasks file for nutanix_role_prism_pulse
-  - name: Generate authorization string for "{{ nutanix_pulse_host }}"
-    set_fact:
-      nutanix_pulse_auth_string: "{{ nutanix_pulse_username }}:{{ nutanix_pulse_password }}"
-    no_log: True
+  - name: Configure pulse
+    block:
+    - name: Generate authorization string for "{{ nutanix_pulse_host }}"
+      set_fact:
+        nutanix_pulse_auth_string: "{{ nutanix_pulse_username }}:{{ nutanix_pulse_password }}"
+      no_log: True
 
-  - name: Generate authorization header for "{{ nutanix_pulse_host }}"
-    set_fact:
-      nutanix_pulse_auth_api: "Basic {{ nutanix_pulse_auth_string | b64encode(encoding='ascii') }}"
-    no_log: True
+    - name: Generate authorization header for "{{ nutanix_pulse_host }}"
+      set_fact:
+        nutanix_pulse_auth_api: "Basic {{ nutanix_pulse_auth_string | b64encode(encoding='ascii') }}"
+      no_log: True
 
-  - name: Configure Pulse on "{{ nutanix_pulse_host }}"
-    uri:
-      url: "https://{{ nutanix_pulse_host }}:{{ nutanix_pulse_port }}/PrismGateway/services/rest/v1/pulse"
-      method: PUT
-      validate_certs: "{{ validate_certs }}"
-      body_format: json
-      body:
-        defaultNutanixEmail: "{{ nutanix_pulse_default_nutanix_email }}"
-        emailContactList: "{{ nutanix_pulse_email_contact_list }}"
-        enable: "{{ nutanix_pulse_status }}"
-        enableDefaultNutanixEmail: "{{ nutanix_pulse_enable_default_nutanix_email }}"
-        identificationInfoScrubbingLevel: "{{ nutanix_pulse_identification_info_scrubbing_level }}"
-        isPulsePromptNeeded: "{{ nutanix_pulse_is_pulse_prompt_needed }}"
-        nosVersion: "{{ nutanix_pulse_nos_version }}"
-        remindLater: "{{ nutanix_pulse_remind_later }}"
-      headers:
-        Authorization: "{{ nutanix_pulse_auth_api }}"
-      status_code: 200
-      return_content: yes
-    register: nutanix_pulse_configure
-    ignore_errors: no
+    - name: Configure Pulse on "{{ nutanix_pulse_host }}"
+      uri:
+        url: "https://{{ nutanix_pulse_host }}:{{ nutanix_pulse_port }}/PrismGateway/services/rest/v1/pulse"
+        method: PUT
+        validate_certs: "{{ validate_certs }}"
+        body_format: json
+        body:
+          defaultNutanixEmail: "{{ nutanix_pulse_default_nutanix_email }}"
+          emailContactList: "{{ nutanix_pulse_email_contact_list }}"
+          enable: "{{ nutanix_pulse_status }}"
+          enableDefaultNutanixEmail: "{{ nutanix_pulse_enable_default_nutanix_email }}"
+          identificationInfoScrubbingLevel: "{{ nutanix_pulse_identification_info_scrubbing_level }}"
+          isPulsePromptNeeded: "{{ nutanix_pulse_is_pulse_prompt_needed }}"
+          nosVersion: "{{ nutanix_pulse_nos_version }}"
+          remindLater: "{{ nutanix_pulse_remind_later }}"
+        headers:
+          Authorization: "{{ nutanix_pulse_auth_api }}"
+        status_code: 200
+        return_content: yes
+      register: nutanix_pulse_configure
+      ignore_errors: no
