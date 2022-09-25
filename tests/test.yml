@@ -1,8 +1,8 @@
 ---
 - hosts: localhost
-  remote_user: root
+  gather_facts: false
   roles:
-    - nutanix_role_prism_pulse
+    - role: ../..
   vars:
     nutanix_pulse_host: 10.38.185.37
     nutanix_pulse_username: admin
