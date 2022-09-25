@@ -33,3 +33,7 @@
         return_content: yes
       register: nutanix_pulse_configure
       ignore_errors: no
+
+    - debug:
+        var: nutanix_pulse_configure
+      when: nutanix_debug
