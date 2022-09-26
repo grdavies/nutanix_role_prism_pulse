@@ -41,4 +41,4 @@
     - ansible.builtin.fail:
         msg: "Pulse configuration failed."
       when:
-        - not nutanix_prism_eula_accept_eula.failed
+        - nutanix_prism_eula_accept_eula.failed
