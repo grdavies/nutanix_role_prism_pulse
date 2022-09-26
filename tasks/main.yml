@@ -38,7 +38,7 @@
         var: nutanix_pulse_configure
       when: nutanix_debug
 
-      - ansible.builtin.fail:
-          msg: "Pulse configuration failed."
-        when:
-          - not nutanix_prism_eula_accept_eula.failed
+    - ansible.builtin.fail:
+        msg: "Pulse configuration failed."
+      when:
+        - not nutanix_prism_eula_accept_eula.failed
